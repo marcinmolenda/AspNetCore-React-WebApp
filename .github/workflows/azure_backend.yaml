@@ -19,15 +19,15 @@ jobs:
 
       - name: dotnetbuild
         run: |
-          cd .\service\Microsoft.DSX.ProjectTemplate.API
+          cd ./service/Microsoft.DSX.ProjectTemplate.API
           dotnet build --configuration release
 
       - name: dotnetpublish
         run: |
-          dotnet publish .\service\Microsoft.DSX.ProjectTemplate.API --no-build --configuration release --output .\service\Microsoft.DSX.ProjectTemplate.API\publish
+          dotnet publish ${{ github.workspace }}/service/Microsoft.DSX.ProjectTemplate.API --no-build --configuration release --output ${{ github.workspace }}/service/Microsoft.DSX.ProjectTemplate.API/publish
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0 
         with:
           name: backend
-          path: .\service\Microsoft.DSX.ProjectTemplate.API\publish # or path/to/artifact
+          path: ${{ github.workspace }}/service/Microsoft.DSX.ProjectTemplate.API/publish # or path/to/artifact
