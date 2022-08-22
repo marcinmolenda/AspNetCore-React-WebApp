@@ -25,7 +25,7 @@ jobs:
       - name: installfrontend
         run: |
           cd ./client
-          npm install
+          npm ci
 
       - name: buildfrontend
         run: |
