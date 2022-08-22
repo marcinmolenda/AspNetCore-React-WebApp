@@ -27,6 +27,7 @@ jobs:
 
       - name: buildfrontend
         run: |
+          cd ./client
           npm run build
 
       - name: Upload a Build Artifact
