@@ -363,4 +363,4 @@ FodyWeavers.xsd
 
 
 # Misc
-**/client/src/app/generated/
+#**/client/src/app/generated/
