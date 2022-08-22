@@ -24,8 +24,7 @@ jobs:
 
       - name: dotnetpublish
         run: |
-          cd .\service\Microsoft.DSX.ProjectTemplate.API
-          dotnet publish --no-build --configuration release --output ./publish
+          dotnet publish .\service\Microsoft.DSX.ProjectTemplate.API --no-build --configuration release --output .\service\Microsoft.DSX.ProjectTemplate.API\publish
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0 
