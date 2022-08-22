@@ -26,11 +26,12 @@ jobs:
         run: |
           cd ./client
           npm ci
-
-      - name: buildfrontend
-        run: |
-          cd ./client
           npm run build
+
+      # - name: buildfrontend
+      #   run: |
+      #     cd ./client
+      #     npm run build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0 
