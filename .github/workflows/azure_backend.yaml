@@ -6,6 +6,9 @@ on:
     paths:
       - service/**
       - .github/workflows/azure_backend.yaml
+permissions:
+  id-token: write
+  contents: read
 jobs: 
   build:
     name: build
@@ -36,6 +39,7 @@ jobs:
           path: ${{ github.workspace }}/service/Microsoft.DSX.ProjectTemplate.API/publish # or path/to/artifact
 
   deploy:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: 'Az CLI login'
