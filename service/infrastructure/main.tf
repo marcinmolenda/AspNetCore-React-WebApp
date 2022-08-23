@@ -43,6 +43,6 @@ resource "azurerm_app_service" "this" {
   name                = azurecaf_name.this.results["azurerm_app_service"]
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  app_service_plan_id = data.terraform_remote_state.infrastructure.app_service_plan.id
+  app_service_plan_id = data.terraform_remote_state.infrastructure.outputs.app_service_plan.id
 
 }
