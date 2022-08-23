@@ -39,6 +39,9 @@ jobs:
       - name: terraform-apply
         run: |
           terraform -chdir="${{ github.workspace }}/infrastructure" apply \
+                    -var="tenant_id=${{ secrets.AZURE_TENANT_ID }}" \
+                    -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+                    -var="client_id=${{ secrets.AZURE_CLIENT_ID }}"
                     --auto-approve
 
  
