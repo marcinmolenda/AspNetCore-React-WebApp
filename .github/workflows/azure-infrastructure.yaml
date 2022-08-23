@@ -29,7 +29,7 @@ jobs:
       - name: terraform-init
         run: |
           terraform -chdir="${{ github.workspace }}/infrastructure" init \
-                    --backend-config="${{ github.workspace }}/infrastructure/config.tfbackend" \ 
+                    --backend-config="${{ github.workspace }}/infrastructure/config.tfbackend" \
                     --backend-config="key=infrastructure.tfstate"
           
 
