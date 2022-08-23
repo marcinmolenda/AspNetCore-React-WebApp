@@ -28,14 +28,14 @@ jobs:
       
       - name: terraform-init
         run: |
-          terraform -chdir="${{ github.workspace }}/infrastructure" init /
-                    --backend-config="${{ github.workspace }}/infrastructure/config.tfbackend" /
+          terraform -chdir="${{ github.workspace }}/infrastructure" init \
+                    --backend-config="${{ github.workspace }}/infrastructure/config.tfbackend" \ 
                     --backend-config="key=infrastructure.tfstate"
           
 
       - name: terraform-apply
         run: |
-          terraform -chdir="${{ github.workspace }}/infrastructure" apply /
+          terraform -chdir="${{ github.workspace }}/infrastructure" apply \
                     --auto-approve            
 
  
