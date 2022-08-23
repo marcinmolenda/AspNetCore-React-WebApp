@@ -1,0 +1,3 @@
+resource_group_name = "TerraformState"
+storage_account_name = "terraformstatex01"
+container_name = "state"
