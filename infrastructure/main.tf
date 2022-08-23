@@ -10,11 +10,12 @@ terraform {
         version = "1.2.6"
     }
     }
+}
+
     provider "azurerm" {
         use_oidc = true
         features {}
     }
-}
 
 resource "azurecaf_name" "this" {
     resource_types = [ "azurerm_resource_group","azurerm_app_service_plan" ]
