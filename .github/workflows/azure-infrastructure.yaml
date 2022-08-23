@@ -39,6 +39,6 @@ jobs:
       - name: terraform-apply
         run: |
           terraform -chdir="${{ github.workspace }}/infrastructure" apply \
-                    --auto-approve            
+                    --auto-approve
 
  
