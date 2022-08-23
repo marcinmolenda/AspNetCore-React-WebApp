@@ -30,7 +30,9 @@ jobs:
         run: |
           terraform -chdir="${{ github.workspace }}/infrastructure" init \
                     --backend-config="${{ github.workspace }}/infrastructure/config.tfbackend" \
-                    --backend-config="key=infrastructure.tfstate"
+                    --backend-config="key=infrastructure.tfstate" \
+                    --backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" \
+                    --backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
           
 
       - name: terraform-apply
