@@ -38,3 +38,50 @@ jobs:
         with:
           name: frontend
           path: ${{ github.workspace }}/client/build # or path/to/artifact
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.4.2
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.0
+      
+      - name: terraform-init
+        run: |
+          terraform -chdir="${{ github.workspace }}/client/infrastructure" init \
+                    --backend-config="${{ github.workspace }}/client/infrastructure/config.tfbackend" \
+                    --backend-config="key=frontend.tfstate" \
+                    --backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" \
+                    --backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+                    --backend-config="client_id=${{ secrets.AZURE_CLIENT_ID }}"
+          
+
+      - name: terraform-apply
+        run: |
+          terraform -chdir="${{ github.workspace }}/client/infrastructure" apply \
+                    -var="tenant_id=${{ secrets.AZURE_TENANT_ID }}" \
+                    -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
+                    -var="client_id=${{ secrets.AZURE_CLIENT_ID }}" \
+                    --auto-approve
+
+      - name: download
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend
+          path: "./artifact"
+
+      - name: 'Run Azure webapp deploy'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: demo-app-weu-frontend
+          package: "./artifact"
