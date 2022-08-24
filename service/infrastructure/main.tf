@@ -79,6 +79,14 @@ resource "azurerm_sql_server" "this" {
   }
 }
 
+resource "azurerm_sql_firewall_rule" "this" {
+  name                = "FirewallRule1"
+  resource_group_name = azurerm_resource_group.this.name
+  server_name         = azurerm_sql_server.this.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "0.0.0.0"
+}
+
 resource "azurerm_sql_database" "this" {
   name                = "sqldatabasebackend1"
   resource_group_name = azurerm_resource_group.this.name
