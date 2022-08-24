@@ -31,8 +31,7 @@ resource "azurecaf_name" "this" {
     resource_types = [ 
         "azurerm_resource_group",
         "azurerm_app_service",
-        "azurerm_sql_server",
-        "azurerm_sql_database"
+        "azurerm_sql_server"
     ]
     name = "weu"
     prefixes = [ "demo" ]
@@ -81,7 +80,7 @@ resource "azurerm_sql_server" "this" {
 }
 
 resource "azurerm_sql_database" "this" {
-  name                = azurecaf_name.this.results["azurerm_sql_database"]
+  name                = "sqldatabasebackend1"
   resource_group_name = azurerm_resource_group.this.name
   location            = azurerm_resource_group.this.location
   server_name         = azurerm_sql_server.this.name
