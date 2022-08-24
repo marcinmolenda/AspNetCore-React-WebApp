@@ -51,5 +51,6 @@ resource "azurerm_app_service" "this" {
   app_service_plan_id = data.terraform_remote_state.infrastructure.outputs.app_service_plan.id
 site_config {
     linux_fx_version = "NODE|14-lts"
+    app_command_line = "pm2 serve /home/site/wwwroot --no-daemon --spa"
   }
 }
