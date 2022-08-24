@@ -49,8 +49,7 @@ resource "azurerm_app_service" "this" {
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   app_service_plan_id = data.terraform_remote_state.infrastructure.outputs.app_service_plan.id
-  
-  }
-  site_config {
+site_config {
     linux_fx_version = "NODE|14-lts"
   }
+}
