@@ -1,5 +1,5 @@
 terraform {
-  frontend "azurerm"{
+  backend "azurerm"{
     use_oidc             = true
   }
   required_providers {
